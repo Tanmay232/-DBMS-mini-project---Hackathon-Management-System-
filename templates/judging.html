@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Judging</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f4dbce; }
+        table { border-collapse: collapse; width: 100%; background: white; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #1c2c46; color: white; }
+        a.back { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #2563eb; }
+        form { background: white; padding: 20px; border-radius: 8px; max-width: 400px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 4px; }
+        button { margin-top: 15px; padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        ul { background: #fff3cd; padding: 10px 20px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="back">&larr; Back to Dashboard</a>
+    <h2>Judging</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <label>Project</label>
+        <select name="project_id" required>
+            {% for p in projects %}
+            <option value="{{ p['project_id'] }}">{{ p['title'] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Judge</label>
+        <select name="judge_id" required>
+            {% for j in judges %}
+            <option value="{{ j['judge_id'] }}">{{ j['name'] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Innovation (0-10)</label>
+        <input type="number" name="innovation" min="0" max="10" required>
+
+        <label>Technical (0-10)</label>
+        <input type="number" name="technical" min="0" max="10" required>
+
+        <label>Presentation (0-10)</label>
+        <input type="number" name="presentation" min="0" max="10" required>
+
+        <button type="submit">Submit Score</button>
+    </form>
+
+    <h3 style="margin-top:30px;">All Scores</h3>
+    <table>
+        <tr>
+            <th>Project</th>
+            <th>Judge</th>
+            <th>Innovation</th>
+            <th>Technical</th>
+            <th>Presentation</th>
+            <th>Total</th>
+        </tr>
+        {% for s in scores %}
+        <tr>
+            <td>{{ s['project_title'] }}</td>
+            <td>{{ s['judge_name'] }}</td>
+            <td>{{ s['innovation'] }}</td>
+            <td>{{ s['technical'] }}</td>
+            <td>{{ s['presentation'] }}</td>
+            <td><strong>{{ s['total'] }}</strong></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

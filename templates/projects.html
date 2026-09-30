@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Projects</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f4dbce; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #1c2c46; color: white; }
+        a.back { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #2563eb; }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="back">&larr; Back to Dashboard</a>
+    <h2>All Projects</h2>
+    <table>
+        <tr>
+            <th>Project</th>
+            <th>Team</th>
+            <th>Problem Statement</th>
+            <th>Repo Link</th>
+            <th>Submitted</th>
+        </tr>
+        {% for p in projects %}
+        <tr>
+            <td>{{ p['title'] }}</td>
+            <td>{{ p['team_name'] }}</td>
+            <td>{{ p['problem_title'] }}</td>
+            <td><a href="{{ p['repo_link'] }}" target="_blank">Link</a></td>
+            <td>{{ p['submitted_at'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

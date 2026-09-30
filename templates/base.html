@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Hackathon Management{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <strong>Hackathon Management</strong>
+        {% if session.get('user_id') %}
+            | Logged in as {{ session['username'] }} ({{ session['role'] }})
+            | <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            | <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+    </nav>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>xex
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

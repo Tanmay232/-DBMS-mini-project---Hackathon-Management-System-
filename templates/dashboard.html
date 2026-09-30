@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Management System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #eed1be;
+            color: #222;
+        }
+
+        .navbar {
+            height: 60px;
+            background: #151739;
+            color: rgb(218, 215, 231);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .navbar h2 {
+            font-size: 20px;
+        }
+
+        .logout {
+            color: rgb(209, 223, 217);
+            text-decoration: none;
+            background: #e42121;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            margin-bottom: 8px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: rgb(210, 219, 219);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            color: #2a2b2d;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .number {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .menu {
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .menu h2 {
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            text-decoration: none;
+            background: #122651;
+            color: rgb(240, 234, 234);
+            padding: 12px 20px;
+            border-radius: 6px;
+        }
+
+        .card, .button, .logout, tr {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .button:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .logout:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        @media (max-width: 900px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h2>Hackathon Management System</h2>
+
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+
+    <div class="container">
+
+        <div class="welcome">
+            <h1>Dashboard</h1>
+            <p>Welcome to the Hackathon Management System.</p>
+        </div>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>Participants</h3>
+        <div class="number">{{ participant_count }}</div>
+    </div>
+
+    <div class="card">
+        <h3>Teams</h3>
+        <div class="number">{{ team_count }}</div>
+    </div>
+
+    <div class="card">
+        <h3>Projects</h3>
+        <div class="number">{{ project_count }}</div>
+    </div>
+
+    <div class="card">
+        <h3>Problem Statements</h3>
+        <div class="number">{{ problem_count }}</div>
+    </div>
+
+</div>
+
+        <div class="menu">
+
+            <h2>Quick Actions</h2>
+
+            <div class="buttons">
+
+                <a href="{{ url_for('manage_participants') }}" class="button">Participants</a>
+
+                <a href="{{ url_for('manage_teams') }}" class="button">Teams</a>
+
+                <a href="{{ url_for('manage_projects') }}" class="button">Projects</a>
+
+                <a href="{{ url_for('manage_problems') }}" class="button">Problems</a>
+
+                <a href="{{ url_for('judging') }}" class="button">Judging</a>
+                
+                <a href="{{ url_for('results') }}" class="button">Results</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

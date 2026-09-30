@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Leaderboard{% endblock %}
+{% block content %}
+    <h2>Leaderboard</h2>
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Rank</th>
+            <th>Project</th>
+            <th>Team</th>
+            <th>Average Score</th>
+        </tr>
+        {% for row in results %}
+        <tr>
+            <td>{{ row['rank'] }}</td>
+            <td>{{ row['project_title'] }}</td>
+            <td>{{ row['team_name'] }}</td>
+            <td>{{ row['avg_score'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

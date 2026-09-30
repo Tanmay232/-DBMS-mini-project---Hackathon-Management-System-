@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f4dbce; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #ccc; padding: 12px; text-align: left; }
+        th { background: #1c2c46; color: white; }
+        a.back { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #2563eb; }
+        .gold { background: #fff3cd; }
+        .silver { background: #eee; }
+        .bronze { background: #ffe0cc; }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="back">&larr; Back to Dashboard</a>
+    <h2>Top 3 Results</h2>
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Project</th>
+            <th>Team</th>
+            <th>Average Score</th>
+        </tr>
+        {% for r in top3 %}
+        <tr class="{{ 'gold' if r['rank'] == 1 else 'silver' if r['rank'] == 2 else 'bronze' if r['rank'] == 3 else '' }}">
+            <td>{{ r['rank'] }}</td>
+            <td>{{ r['project_title'] }}</td>
+            <td>{{ r['team_name'] }}</td>
+            <td>{{ r['avg_score'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

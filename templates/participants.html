@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Participants</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f4dbce; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #1c2c46; color: white; }
+        a.back { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #2563eb; }
+        .no-team { color: #e42121; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="back">&larr; Back to Dashboard</a>
+    <h2>All Participants</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>College</th>
+            <th>Skills</th>
+            <th>Team</th>
+        </tr>
+        {% for p in participants %}
+        <tr>
+            <td>{{ p['name'] }}</td>
+            <td>{{ p['email'] }}</td>
+            <td>{{ p['college'] }}</td>
+            <td>{{ p['skills'] }}</td>
+            <td>
+                {% if p['team_name'] %}
+                    {{ p['team_name'] }}
+                {% else %}
+                    <span class="no-team">No team</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
